@@ -1,0 +1,49 @@
+@use '../../_css/variables' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: $color-text;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: $color-surface-alt;
+}
+
+.ecoBadge {
+  position: absolute;
+  top: $spacing-sm;
+  left: $spacing-sm;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  padding-top: $spacing-md;
+}
+
+.category {
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  color: $color-text-muted;
+}
+
+.title {
+  font-family: $font-heading;
+  font-size: $font-size-lg;
+  font-weight: 400;
+  line-height: $line-height-tight;
+}

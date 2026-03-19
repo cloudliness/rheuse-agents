@@ -1,0 +1,49 @@
+@use '../../_css/variables' as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: 0.875rem 1.75rem;
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-button;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.filled {
+  background-color: $color-primary-dark;
+  color: $color-surface;
+  border-color: $color-primary-dark;
+
+  &:hover:not(:disabled) {
+    background-color: $color-primary;
+  }
+}
+
+.outlined {
+  background-color: transparent;
+  color: $color-text;
+  border-color: $color-text;
+
+  &:hover:not(:disabled) {
+    background-color: $color-text;
+    color: $color-surface;
+  }
+}
+
+.small {
+  padding: 0.625rem 1.25rem;
+  font-size: 0.625rem;
+}

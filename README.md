@@ -32,7 +32,24 @@ An eco-friendly ecommerce platform selling sustainable, reusable, and recycled p
 src/
 ├── app/
 │   ├── _css/                      # Global SCSS variables & reset
-│   ├── layout.tsx                 # Root layout (fonts, metadata)
+│   ├── _components/               # Shared UI components
+│   │   ├── Button/                # Filled + outlined variants
+│   │   ├── Input/                 # Form input with label + error
+│   │   ├── Media/                 # Responsive image (next/image)
+│   │   ├── Price/                 # Currency formatter (cents → display)
+│   │   ├── EcoImpactBadge/        # Recycled % + CO₂ saved badge
+│   │   ├── Header/                # Site header (nav + cart + account)
+│   │   ├── Footer/                # Columns + social + copyright
+│   │   ├── Hero/                  # Hero banner with CTAs
+│   │   ├── Card/                  # Product card with eco badge
+│   │   ├── CartLink/              # Cart icon with item count badge
+│   │   ├── Categories/            # Category grid with image overlays
+│   │   └── Newsletter/            # Email signup section
+│   ├── _providers/                # React context providers
+│   │   ├── Cart/                  # Cart state (localStorage persisted)
+│   │   ├── Auth/                  # User auth via Payload API
+│   │   └── index.tsx              # Combined provider wrapper
+│   ├── layout.tsx                 # Root layout (fonts, metadata, providers)
 │   ├── page.tsx                   # Home page
 │   └── page.module.scss           # Home page styles
 └── payload/
@@ -64,7 +81,7 @@ This project is built **one phase at a time**. Each phase completes fully, the R
 - `"ask the superintendent [question]"` — Get answers about what's built
 - `"catch me up"` — Full context restoration after a token reset
 
-**Current Phase:** Phase 3 (Complete) → **Phase 4 next**
+**Current Phase:** Phase 4 (Complete) → **Phase 5 next**
 
 ## What's Been Done
 
@@ -112,7 +129,9 @@ Project scaffolded with all core configs, styles, and environment setup.
 - **CMS**: Payload CMS with admin at `/admin`
 - **Payments**: Stripe with server-side price validation
 - **Deployment**: Docker-only (no Vercel)
-- **All skills consolidated under `.github/skills/`** for a single-location convention
+- **Design system**: Matched to user's design mockups — square corners, ALL-CAPS labels, editorial whitespace, italic serif headings
+- **SCSS tokens updated**: Darker CTA green `#1F4D38`, softer charcoal text `#2E2E2E`, warm grey surface-alt `#F5F3EE`, 0px border-radius
+- **Typography utilities**: Letter-spacing for labels (0.12em), buttons (0.08em), font-size scale (11px–18px)
 - **Next.js 15.4.x** (Payload CMS v3 peer dependency requires Next 15, not 14)
 - **Package manager**: npm
 
@@ -140,19 +159,32 @@ All Payload CMS data models, access control, and hooks are in place.
 
 ---
 
+### Phase 4: Core Components (Complete)
+
+All reusable UI components, layout components, and state providers are in place.
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Button | ✅ | Filled + outlined variants, square corners, ALL-CAPS, link-or-button |
+| Input | ✅ | Label, placeholder, error state, styled to match design |
+| Media | ✅ | Responsive `next/image` wrapper, fill mode, resource object support |
+| Price | ✅ | Cents → currency format, compare-at price with strikethrough |
+| EcoImpactBadge | ✅ | Recycled % + CO₂ saved, compact variant for cards |
+| Header | ✅ | Logo (italic serif), centered nav links, cart + account icons, sticky |
+| CartLink | ✅ | Shopping bag icon with item count badge |
+| Footer | ✅ | 4-column grid, logo + tagline, link columns, social, copyright bar |
+| Hero | ✅ | Full-bleed with gradient overlay, label + heading + accent italic + CTAs |
+| Card (Product) | ✅ | Image with eco badge overlay, category label, title, price |
+| Categories grid | ✅ | 2-col + full-width last, image overlays, "Explore Series" CTAs |
+| Newsletter | ✅ | Centered section, email input + subscribe button |
+| CartProvider | ✅ | useReducer, localStorage persistence, add/remove/update/clear |
+| AuthProvider | ✅ | Payload /api/users endpoints, login/logout/createAccount |
+| Providers wrapper | ✅ | `<Providers>` wraps Auth + Cart, used in root layout |
+| Layout wired | ✅ | Header + Footer + Providers in root layout.tsx |
+
+---
+
 ## Next Steps
-
-### Phase 4: Core Components
-
-- [ ] Header with navigation + cart icon
-- [ ] Footer with links + newsletter
-- [ ] Product Card with EcoImpactBadge
-- [ ] Hero banner
-- [ ] Categories grid
-- [ ] Price display
-- [ ] Button, Input, Media components
-- [ ] Cart context provider
-- [ ] Auth context provider
 
 ### Phase 5: Pages & Routes
 
@@ -225,4 +257,4 @@ Admin dashboard: `http://localhost:3000/admin`
 
 ---
 
-*Last updated: March 19, 2026 — Phase 2 complete (project initialization)*
+*Last updated: March 19, 2026 — Phase 4 complete (core components & providers)*

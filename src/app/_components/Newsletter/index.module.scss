@@ -1,0 +1,60 @@
+@use '../../_css/variables' as *;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: $spacing-section $spacing-lg;
+  background-color: $color-surface-alt;
+}
+
+.label {
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  margin-bottom: $spacing-md;
+}
+
+.heading {
+  font-family: $font-heading;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 400;
+  max-width: 480px;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-xl;
+}
+
+.form {
+  display: flex;
+  gap: $spacing-sm;
+  width: 100%;
+  max-width: 440px;
+
+  @media (max-width: $bp-mobile) {
+    flex-direction: column;
+  }
+}
+
+.input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  font-family: $font-body;
+  font-size: $font-size-base;
+  color: $color-text;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    border-color: $color-primary;
+  }
+}

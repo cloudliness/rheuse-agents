@@ -1,6 +1,9 @@
 import React from 'react'
 import type { Metadata } from 'next'
 import { Playfair_Display, Inter, DM_Sans } from 'next/font/google'
+import { Providers } from './_providers'
+import { Header } from './_components/Header'
+import { Footer } from './_components/Footer'
 import '@/app/_css/globals.scss'
 
 const playfairDisplay = Playfair_Display({
@@ -37,7 +40,35 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${playfairDisplay.variable} ${inter.variable} ${dmSans.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <Providers>
+          <Header
+            navLinks={[
+              { label: 'Shop All', url: '/products' },
+              { label: 'Our Story', url: '/about' },
+            ]}
+          />
+          <main>{children}</main>
+          <Footer
+            columns={[
+              {
+                heading: 'Shop',
+                links: [
+                  { label: 'All Products', url: '/products' },
+                  { label: 'Wholesale', url: '/wholesale' },
+                ],
+              },
+              {
+                heading: 'Impact',
+                links: [
+                  { label: 'Sustainability Report', url: '/sustainability' },
+                  { label: 'Our Story', url: '/about' },
+                ],
+              },
+            ]}
+          />
+        </Providers>
+      </body>
     </html>
   )
 }

@@ -1,0 +1,28 @@
+@use '../../_css/variables' as *;
+
+.badge {
+  display: inline-flex;
+  gap: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  background-color: rgba(45, 106, 79, 0.08);
+  font-family: $font-accent;
+  font-size: $font-size-sm;
+  color: $color-primary-dark;
+}
+
+.compact {
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-label;
+  gap: $spacing-sm;
+}
+
+.metric {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.icon {
+  font-size: 0.875rem;
+  line-height: 1;
+}

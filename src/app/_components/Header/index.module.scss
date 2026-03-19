@@ -1,0 +1,67 @@
+@use '../../_css/variables' as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: $color-surface;
+  border-bottom: 1px solid $color-border;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $spacing-md $spacing-lg;
+}
+
+.logo {
+  font-family: $font-heading;
+  font-size: 1.25rem;
+  font-weight: 400;
+  font-style: italic;
+  color: $color-text;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xl;
+
+  @media (max-width: $bp-tablet) {
+    display: none;
+  }
+}
+
+.navLink {
+  font-family: $font-accent;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $color-text;
+  text-decoration: none;
+  letter-spacing: $letter-spacing-button;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+}
+
+.iconLink {
+  color: $color-text;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $color-primary;
+  }
+}

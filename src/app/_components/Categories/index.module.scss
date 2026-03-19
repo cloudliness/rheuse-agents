@@ -1,0 +1,130 @@
+@use '../../_css/variables' as *;
+
+.section {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $spacing-section $spacing-lg;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: $spacing-xl;
+}
+
+.label {
+  display: block;
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  margin-bottom: $spacing-sm;
+}
+
+.heading {
+  font-family: $font-heading;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 400;
+}
+
+.viewAll {
+  font-family: $font-accent;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $color-text;
+  text-decoration: none;
+  letter-spacing: $letter-spacing-button;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-lg;
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  text-decoration: none;
+  color: $color-surface;
+}
+
+.wide {
+  grid-column: 1 / -1;
+  aspect-ratio: 21 / 9;
+}
+
+.imageWrapper {
+  position: absolute;
+  inset: 0;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.1) 60%,
+    transparent 100%
+  );
+}
+
+.cardContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  padding: $spacing-xl;
+}
+
+.cardTitle {
+  font-family: $font-heading;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 400;
+  color: $color-surface;
+  margin-bottom: $spacing-xs;
+}
+
+.cardDesc {
+  font-size: $font-size-sm;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 300px;
+  margin-bottom: $spacing-md;
+}
+
+.cta {
+  display: inline-block;
+  padding: $spacing-sm $spacing-md;
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-button;
+  text-transform: uppercase;
+  color: $color-surface;
+  border: 1px solid $color-surface;
+  width: fit-content;
+  transition: background-color 0.2s ease;
+
+  .card:hover & {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+}

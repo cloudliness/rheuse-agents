@@ -1,0 +1,44 @@
+@use '../../_css/variables' as *;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.label {
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  color: $color-text-muted;
+}
+
+.input {
+  padding: 0.75rem 1rem;
+  font-family: $font-body;
+  font-size: $font-size-base;
+  color: $color-text;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    border-color: $color-primary;
+  }
+}
+
+.hasError {
+  border-color: $color-error;
+}
+
+.error {
+  font-size: $font-size-sm;
+  color: $color-error;
+}

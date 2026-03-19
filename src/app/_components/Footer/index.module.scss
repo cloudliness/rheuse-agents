@@ -1,0 +1,109 @@
+@use '../../_css/variables' as *;
+
+.footer {
+  background-color: $color-surface;
+  border-top: 1px solid $color-border;
+  margin-top: $spacing-section;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(auto-fit, minmax(140px, 1fr));
+  gap: $spacing-2xl;
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $spacing-section $spacing-lg $spacing-2xl;
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-xl;
+  }
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.logo {
+  font-family: $font-heading;
+  font-size: 1.125rem;
+  font-weight: 400;
+  font-style: italic;
+  color: $color-text;
+  text-decoration: none;
+}
+
+.tagline {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  line-height: $line-height-body;
+  max-width: 280px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.columnHeading {
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  color: $color-text;
+}
+
+.linkList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.link {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.social {
+  display: flex;
+  gap: $spacing-md;
+}
+
+.socialLink {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.bottom {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $spacing-lg;
+  border-top: 1px solid $color-border;
+}
+
+.copyright {
+  font-size: $font-size-label;
+  color: $color-text-muted;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+}
