@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import { Media } from '@/app/_components/Media'
 import { Price } from '@/app/_components/Price'
 import { EcoImpactBadge } from '@/app/_components/EcoImpactBadge'
+import { EcoScore } from '@/app/_components/EcoScore'
+import { CertificationBadges } from '@/app/_components/CertificationBadges'
 import { ProductActions } from './ProductActions'
 import classes from './page.module.scss'
 
@@ -91,6 +93,14 @@ export default async function ProductDetailPage({ params }: Props) {
           />
         )}
 
+        {ecoData && (
+          <EcoScore
+            recycledPercentage={ecoData.recycledPercentage}
+            carbonSavedKg={ecoData.carbonSavedKg}
+            certificationCount={ecoData.certifications?.length}
+          />
+        )}
+
         <ProductActions product={product} />
 
         {stock != null && stock <= 0 && (
@@ -123,13 +133,10 @@ export default async function ProductDetailPage({ params }: Props) {
         {ecoData?.certifications?.length > 0 && (
           <div className={classes.certifications}>
             <h3 className={classes.sectionLabel}>Certifications</h3>
-            <div className={classes.certList}>
-              {ecoData.certifications.map((cert: string) => (
-                <span key={cert} className={classes.certBadge}>
-                  {cert}
-                </span>
-              ))}
-            </div>
+            <CertificationBadges
+              certifications={ecoData.certifications}
+              layout="inline"
+            />
           </div>
         )}
       </div>

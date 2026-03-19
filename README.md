@@ -49,7 +49,13 @@ src/
 │   │   ├── PaymentForm/           # Stripe Elements payment form
 │   │   ├── Price/                 # Currency formatter (cents → display)
 │   │   ├── QuantityStepper/       # +/- quantity control
-│   │   └── RichText/              # Payload Lexical content renderer
+│   │   ├── RichText/              # Payload Lexical content renderer
+│   │   ├── EcoImpactDashboard/    # Aggregate eco stats (homepage)
+│   │   ├── EcoScore/              # 1-5 leaf eco rating for products
+│   │   ├── CertificationBadges/   # Fair Trade, Organic, B Corp badges
+│   │   ├── WhyEcoBlocks/          # Educational eco content blocks
+│   │   ├── RefillReturnCTA/       # Circular program return CTA
+│   │   └── ImpactReceipt/         # Post-purchase eco impact summary
 │   ├── _utilities/                # Shared utilities
 │   │   ├── stripe.ts              # Server-side Stripe instance
 │   │   └── getStripe.ts           # Client-side Stripe loader
@@ -102,7 +108,7 @@ This project is built **one phase at a time**. Each phase completes fully, the R
 - `"ask the superintendent [question]"` — Get answers about what's built
 - `"catch me up"` — Full context restoration after a token reset
 
-**Current Phase:** Phase 6 (Complete) → **Phase 7 next**
+**Current Phase:** Phase 7 (Complete) → **Phase 8 next**
 
 ## What's Been Done
 
@@ -242,16 +248,23 @@ Stripe payment processing fully integrated with server-side price validation.
 
 ---
 
+### Phase 7: RHEUSE Features (Complete)
+
+Eco-focused differentiating features that make RHEUSE more than a generic store.
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Eco Impact Dashboard | ✅ | 4-stat grid on dark green bg (Products Reused, CO₂ Saved, Plastic Diverted, Countries) |
+| Product Eco Score | ✅ | 1-5 leaf visual rating, weighted formula (recycled 40%, carbon 30%, certs 30%) |
+| Certification Badges | ✅ | 8 certification types (Fair Trade, Organic, B Corp, etc.) with icons/colors |
+| "Why Eco?" Content Blocks | ✅ | 4-block educational grid: Sustainably Sourced, Low-Impact, Zero-Plastic, Circular |
+| Refill/Return CTA | ✅ | 3-step circular program section with icon loop visual |
+| Impact Receipt | ✅ | Post-purchase eco summary: items, avg recycled %, CO₂ saved, certifications, carbon offset |
+| Wired into pages | ✅ | Dashboard + WhyEco + RefillReturn on homepage; EcoScore + CertBadges on product detail; ImpactReceipt on order confirmation |
+
+---
+
 ## Next Steps
-
-### Phase 7: RHEUSE Features
-
-- [ ] Eco Impact Dashboard (homepage)
-- [ ] Product Eco Scores (visual rating)
-- [ ] Sustainability Certifications badges
-- [ ] "Why Eco?" content blocks
-- [ ] Refill/Return Program CTAs
-- [ ] Impact Receipt (post-purchase)
 
 ### Phase 8: SEO & Performance
 
@@ -296,4 +309,4 @@ Admin dashboard: `http://localhost:3000/admin`
 
 ---
 
-*Last updated: Phase 6 complete (Stripe payments & checkout)*
+*Last updated: Phase 7 complete (RHEUSE eco features & differentiators)*

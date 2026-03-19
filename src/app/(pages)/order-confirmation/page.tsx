@@ -2,10 +2,20 @@ import React from 'react'
 import Link from 'next/link'
 import { Price } from '@/app/_components/Price'
 import { Button } from '@/app/_components/Button'
+import { ImpactReceipt } from '@/app/_components/ImpactReceipt'
 import classes from './page.module.scss'
 
 type OrderItem = {
-  product: { title: string } | string
+  product:
+    | {
+        title: string
+        ecoData?: {
+          recycledPercentage?: number
+          carbonSavedKg?: number
+          certifications?: string[]
+        }
+      }
+    | string
   quantity: number
   price: number
 }
@@ -15,6 +25,7 @@ type Order = {
   orderNumber?: string
   total: number
   items: OrderItem[]
+  carbonOffset?: boolean
   createdAt: string
 }
 
@@ -110,14 +121,19 @@ export default async function OrderConfirmationPage({
         </div>
       </div>
 
-      <div className={classes.impact}>
-        <h3 className={classes.impactTitle}>Your Eco Impact</h3>
-        <p className={classes.impactText}>
-          By choosing RHEUSE, you&apos;ve contributed to reducing single-use
-          plastic waste. Every item is crafted from sustainable materials and
-          shipped in 100% compostable packaging.
-        </p>
-      </div>
+      <ImpactReceipt
+        items={order.items.map((item) => {
+          const prod = typeof item.product === 'string' ? null : item.product
+          return {
+            title: prod?.title || (typeof item.product === 'string' ? item.product : ''),
+            quantity: item.quantity,
+            recycledPercentage: prod?.ecoData?.recycledPercentage,
+            carbonSavedKg: prod?.ecoData?.carbonSavedKg,
+            certifications: prod?.ecoData?.certifications,
+          }
+        })}
+        carbonOffset={order.carbonOffset}
+      />
 
       <div className={classes.actions}>
         <Button label="Continue Shopping" href="/products" variant="filled" />

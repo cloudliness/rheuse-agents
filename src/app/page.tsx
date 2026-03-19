@@ -1,7 +1,10 @@
 import React from 'react'
 import { Hero } from './_components/Hero'
+import { EcoImpactDashboard } from './_components/EcoImpactDashboard'
 import { Categories } from './_components/Categories'
 import { MissionSection } from './_components/MissionSection'
+import { WhyEcoBlocks } from './_components/WhyEcoBlocks'
+import { RefillReturnCTA } from './_components/RefillReturnCTA'
 import { Newsletter } from './_components/Newsletter'
 import classes from './page.module.scss'
 
@@ -41,12 +44,18 @@ export default function HomePage() {
 
       <MissionSection />
 
+      <EcoImpactDashboard />
+
       <Categories
         label="Curated Selections"
         heading="Featured Collections"
         categories={placeholderCategories}
         viewAllHref="/products"
       />
+
+      <WhyEcoBlocks />
+
+      <RefillReturnCTA />
 
       <Newsletter />
     </div>

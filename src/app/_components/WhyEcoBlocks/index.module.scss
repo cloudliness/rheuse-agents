@@ -1,0 +1,73 @@
+@use '../../_css/variables' as *;
+
+.section {
+  padding: $spacing-section $spacing-lg;
+}
+
+.inner {
+  max-width: $max-width;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.label {
+  display: block;
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  margin-bottom: $spacing-sm;
+}
+
+.heading {
+  font-family: $font-heading;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 400;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-2xl;
+
+  em {
+    font-style: italic;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-lg;
+  text-align: left;
+
+  @media (max-width: $bp-desktop) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.block {
+  padding: $spacing-lg;
+  border: 1px solid $color-border;
+}
+
+.icon {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: $spacing-md;
+}
+
+.blockTitle {
+  font-family: $font-body;
+  font-size: $font-size-base;
+  font-weight: 600;
+  margin-bottom: $spacing-xs;
+}
+
+.blockDesc {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  line-height: $line-height-body;
+}

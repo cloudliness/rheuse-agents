@@ -1,0 +1,31 @@
+@use '../../_css/variables' as *;
+
+.score {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.leaves {
+  display: flex;
+  gap: 2px;
+}
+
+.leaf {
+  font-size: 1rem;
+  opacity: 0.2;
+  transition: opacity 0.2s;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.label {
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  color: $color-primary-dark;
+}

@@ -1,0 +1,82 @@
+@use '../../_css/variables' as *;
+
+.section {
+  background-color: $color-primary-dark;
+  color: $color-surface;
+  padding: $spacing-section $spacing-lg;
+}
+
+.inner {
+  max-width: $max-width;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.label {
+  display: block;
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  color: rgba($color-surface, 0.6);
+  margin-bottom: $spacing-md;
+}
+
+.heading {
+  font-family: $font-heading;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 400;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-md;
+
+  em {
+    font-style: italic;
+  }
+}
+
+.description {
+  font-size: $font-size-sm;
+  color: rgba($color-surface, 0.75);
+  max-width: 520px;
+  margin: 0 auto $spacing-2xl;
+  line-height: $line-height-body;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-lg;
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-lg;
+}
+
+.statIcon {
+  font-size: 1.75rem;
+  margin-bottom: $spacing-xs;
+}
+
+.statValue {
+  font-family: $font-heading;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.statLabel {
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  color: rgba($color-surface, 0.6);
+}

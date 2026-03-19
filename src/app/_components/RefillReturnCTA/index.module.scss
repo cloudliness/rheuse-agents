@@ -1,0 +1,124 @@
+@use '../../_css/variables' as *;
+
+.section {
+  padding: $spacing-section $spacing-lg;
+  background-color: $color-surface-alt;
+}
+
+.inner {
+  max-width: $max-width;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-2xl;
+  align-items: center;
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  @media (max-width: $bp-tablet) {
+    align-items: center;
+  }
+}
+
+.label {
+  display: block;
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  margin-bottom: $spacing-sm;
+}
+
+.heading {
+  font-family: $font-heading;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 400;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-md;
+
+  em {
+    font-style: italic;
+  }
+}
+
+.description {
+  font-size: $font-size-base;
+  color: $color-text-muted;
+  line-height: $line-height-body;
+  max-width: 480px;
+  margin-bottom: $spacing-lg;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-lg;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.stepNumber {
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 700;
+  letter-spacing: $letter-spacing-label;
+  color: $color-primary-dark;
+  min-width: 28px;
+}
+
+.stepText {
+  font-size: $font-size-sm;
+  color: $color-text;
+}
+
+.cta {
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  background-color: $color-primary-dark;
+  color: #fff;
+  text-decoration: none;
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconLoop {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  font-size: 2.5rem;
+}
+
+.arrow {
+  font-size: 1.5rem;
+  color: $color-text-muted;
+}
