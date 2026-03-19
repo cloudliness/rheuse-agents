@@ -36,7 +36,24 @@ src/
 │   ├── page.tsx                   # Home page
 │   └── page.module.scss           # Home page styles
 └── payload/
-    └── payload.config.ts          # Payload CMS configuration
+    ├── payload.config.ts          # Payload CMS configuration
+    ├── access/
+    │   └── roles.ts               # Access control helpers (isAdmin, etc.)
+    ├── fields/
+    │   ├── slug.ts                # Shared slug field with auto-generation
+    │   └── link.ts                # Shared link field (internal/external)
+    ├── collections/
+    │   ├── Users.ts               # Auth + roles + addresses
+    │   ├── Media.ts               # Image uploads with sizes
+    │   ├── Categories.ts          # Hierarchical product categories
+    │   ├── Products.ts            # Products with eco-data & stock hooks
+    │   ├── Orders.ts              # Orders with status workflow & stock hooks
+    │   ├── Pages.ts               # CMS content pages
+    │   └── Discounts.ts           # Promo codes & discounts
+    └── globals/
+        ├── Header.ts              # Nav links + CTA
+        ├── Footer.ts              # Columns + social + newsletter
+        └── Settings.ts            # Site-wide settings + SEO defaults
 ```
 
 ## Build Approach
@@ -47,7 +64,7 @@ This project is built **one phase at a time**. Each phase completes fully, the R
 - `"ask the superintendent [question]"` — Get answers about what's built
 - `"catch me up"` — Full context restoration after a token reset
 
-**Current Phase:** Phase 2 (Complete) → **Phase 3 next**
+**Current Phase:** Phase 3 (Complete) → **Phase 4 next**
 
 ## What's Been Done
 
@@ -101,20 +118,29 @@ Project scaffolded with all core configs, styles, and environment setup.
 
 ---
 
+### Phase 3: Payload Collections & Admin (Complete)
+
+All Payload CMS data models, access control, and hooks are in place.
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Users collection | ✅ | Auth, roles (super-admin/admin/editor/customer), addresses, stripeCustomerID |
+| Media collection | ✅ | Image uploads with 3 sizes (thumbnail/card/hero), alt text required |
+| Categories collection | ✅ | Hierarchical with parent self-reference, slug auto-gen |
+| Products collection | ✅ | Eco-data group, price in cents, stock hooks (prevent negative, low-stock warning) |
+| Orders collection | ✅ | 7-state status workflow, auto order number, stock decrement on confirm |
+| Pages collection | ✅ | Rich text content, SEO meta group |
+| Discounts collection | ✅ | Percentage/fixed/free-shipping, validity dates, usage limits |
+| Header global | ✅ | Nav links array (max 8) + CTA button |
+| Footer global | ✅ | Columns with links, social links, newsletter, copyright |
+| Settings global | ✅ | Site name, tagline, SEO defaults, contact info |
+| Access control | ✅ | Role-based helpers: isAdmin, isSuperAdmin, isAdminOrSelf, isAdminOrOwner, etc. |
+| Shared fields | ✅ | Slug (auto-gen from title) and Link (internal/external) reusable fields |
+| Config wired | ✅ | All 7 collections + 3 globals registered in payload.config.ts |
+
+---
+
 ## Next Steps
-
-### Phase 3: Payload Collections & Admin
-
-- [ ] Products collection (with eco-data fields)
-- [ ] Categories collection
-- [ ] Users collection (with roles)
-- [ ] Orders collection (with status workflow)
-- [ ] Media collection
-- [ ] Pages collection
-- [ ] Discounts collection
-- [ ] Header, Footer, Settings globals
-- [ ] Stripe sync hooks
-- [ ] Access control policies
 
 ### Phase 4: Core Components
 
