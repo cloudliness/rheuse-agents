@@ -3,6 +3,7 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -38,4 +39,5 @@ export default buildConfig({
   },
   cors: [process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'],
   csrf: [process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'],
+  sharp,
 })
