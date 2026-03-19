@@ -10,7 +10,7 @@ An eco-friendly ecommerce platform selling sustainable, reusable, and recycled p
 
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
-| Framework | Next.js 14+ (App Router) | Full-stack React with SSR/SSG |
+| Framework | Next.js 15 (App Router) | Full-stack React with SSR/SSG |
 | Language | TypeScript | Type safety throughout |
 | CMS | Payload CMS | Headless CMS with admin dashboard |
 | Database | MongoDB | Document storage for products/orders |
@@ -29,6 +29,14 @@ An eco-friendly ecommerce platform selling sustainable, reusable, and recycled p
     ├── marketing/                 # SEO copywriting & color psychology
     ├── devops-deploy/             # Docker containerization & deployment
     └── admin-crm/                 # Back-office user/product/order management
+src/
+├── app/
+│   ├── _css/                      # Global SCSS variables & reset
+│   ├── layout.tsx                 # Root layout (fonts, metadata)
+│   ├── page.tsx                   # Home page
+│   └── page.module.scss           # Home page styles
+└── payload/
+    └── payload.config.ts          # Payload CMS configuration
 ```
 
 ## Build Approach
@@ -39,7 +47,7 @@ This project is built **one phase at a time**. Each phase completes fully, the R
 - `"ask the superintendent [question]"` — Get answers about what's built
 - `"catch me up"` — Full context restoration after a token reset
 
-**Current Phase:** Phase 1 (Complete) → **Phase 2 next**
+**Current Phase:** Phase 2 (Complete) → **Phase 3 next**
 
 ## What's Been Done
 
@@ -62,6 +70,24 @@ All foundational skills and agents have been defined. These provide the blueprin
 |-------|---------|
 | **Superintendent** | Read-only project manager — scans codebase against 60+ item build checklist, produces status reports, restores context when conversations reset |
 
+### Phase 2: Project Initialization (Complete)
+
+Project scaffolded with all core configs, styles, and environment setup.
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Next.js + TypeScript | ✅ | Next.js 15.4.x (Payload v3 requires 15.x) |
+| Payload CMS | ✅ | `payload.config.ts` with MongoDB adapter + Lexical editor |
+| MongoDB connection | ✅ | Configured via `MONGODB_URI` env var |
+| `next.config.mjs` | ✅ | Standalone output, `withPayload()` wrapper |
+| `tsconfig.json` | ✅ | Strict mode, path aliases `@/*` and `@payload/*` |
+| SCSS global variables | ✅ | Brand colors, typography, spacing, breakpoints, shadows |
+| `.env.local` + `.env.example` | ✅ | All required vars templated |
+| `.gitignore` | ✅ | node_modules, .next, .env files, media |
+| Root layout | ✅ | Google Fonts loaded (Playfair Display, Inter, DM Sans) |
+| Home page | ✅ | Placeholder with hero section |
+| Git initialized | ✅ | Initial commit on `master` branch |
+
 ### Key Decisions Made
 
 - **Brand colors**: Deep forest green (`#2D6A4F`) primary, sandy earth (`#D4A373`) accent, warm cream (`#FEFAE0`) background
@@ -70,21 +96,12 @@ All foundational skills and agents have been defined. These provide the blueprin
 - **Payments**: Stripe with server-side price validation
 - **Deployment**: Docker-only (no Vercel)
 - **All skills consolidated under `.github/skills/`** for a single-location convention
+- **Next.js 15.4.x** (Payload CMS v3 peer dependency requires Next 15, not 14)
+- **Package manager**: npm
 
 ---
 
 ## Next Steps
-
-### Phase 2: Project Initialization
-
-- [ ] Initialize Next.js 14 project with TypeScript
-- [ ] Install and configure Payload CMS
-- [ ] Set up MongoDB connection
-- [ ] Configure `next.config.js` (standalone output, image domains)
-- [ ] Create `tsconfig.json` with strict mode
-- [ ] Set up SCSS with global variables (brand colors, typography)
-- [ ] Create `.env.local` from the devops-deploy template
-- [ ] Initialize git repo with `.gitignore`
 
 ### Phase 3: Payload Collections & Admin
 
@@ -165,8 +182,8 @@ All foundational skills and agents have been defined. These provide the blueprin
 docker compose up
 
 # Or run directly
-yarn install
-yarn dev
+npm install
+npm run dev
 ```
 
 Admin dashboard: `http://localhost:3000/admin`
@@ -182,4 +199,4 @@ Admin dashboard: `http://localhost:3000/admin`
 
 ---
 
-*Last updated: March 19, 2026 — Phase 1 complete (skills & agent architecture)*
+*Last updated: March 19, 2026 — Phase 2 complete (project initialization)*
