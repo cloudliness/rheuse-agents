@@ -10,8 +10,13 @@
   --color-surface:       #{$color-surface};
   --color-text:          #{$color-text};
   --color-text-muted:    #{$color-text-muted};
+  --color-border:        #{$color-border};
+  --color-surface-alt:   #{$color-surface-alt};
   --color-success:       #{$color-success};
   --color-error:         #{$color-error};
+
+  --spacing-section:    #{$spacing-section};
+  --spacing-section-lg: #{$spacing-section-lg};
 
   --max-width:        #{$max-width};
   --border-radius:    #{$border-radius};
@@ -41,13 +46,15 @@ body {
   font-family: $font-body;
   color: var(--color-text);
   background-color: var(--color-background);
-  line-height: 1.6;
+  font-size: $font-size-base;
+  line-height: $line-height-body;
   min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-heading;
-  line-height: 1.2;
+  line-height: $line-height-tight;
+  font-weight: 400;
 }
 
 a {

@@ -1,14 +1,16 @@
 // ─── RHEUSE Brand Colors ───────────────────────────────────────────────────
 $color-primary:       #2D6A4F;
 $color-primary-light: #52B788;
-$color-primary-dark:  #1B4332;
+$color-primary-dark:  #1F4D38;
 $color-accent:        #D4A373;
 $color-background:    #FEFAE0;
 $color-surface:       #FFFFFF;
-$color-text:          #2B2D42;
-$color-text-muted:    #6C757D;
+$color-surface-alt:   #F5F3EE;
+$color-text:          #2E2E2E;
+$color-text-muted:    #7A7A72;
+$color-border:        #E0DDD5;
 $color-success:       #40916C;
-$color-error:         #E63946;
+$color-error:         #C1292E;
 
 // ─── Typography ────────────────────────────────────────────────────────────
 $font-heading: var(--font-heading), 'Playfair Display', serif;
@@ -22,6 +24,8 @@ $spacing-md:  1rem;
 $spacing-lg:  2rem;
 $spacing-xl:  3rem;
 $spacing-2xl: 4rem;
+$spacing-section: 6rem;   // ~96px between major sections
+$spacing-section-lg: 7.5rem; // ~120px for hero/featured sections
 
 // ─── Breakpoints ───────────────────────────────────────────────────────────
 $bp-mobile:  480px;
@@ -31,9 +35,19 @@ $bp-wide:    1280px;
 
 // ─── Layout ────────────────────────────────────────────────────────────────
 $max-width:  1200px;
-$border-radius: 8px;
-$border-radius-sm: 4px;
-$border-radius-lg: 12px;
+$border-radius: 0px;      // Square/architectural — matches design
+$border-radius-sm: 0px;
+$border-radius-lg: 0px;
 $shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.06);
 $shadow-md:  0 4px 6px rgba(0, 0, 0, 0.07);
 $shadow-lg:  0 10px 15px rgba(0, 0, 0, 0.1);
+
+// ─── Typography Utilities ──────────────────────────────────────────────────
+$letter-spacing-label: 0.12em;  // ALL-CAPS section labels
+$letter-spacing-button: 0.08em; // Button text
+$font-size-label: 0.6875rem;    // 11px — small caps labels
+$font-size-sm: 0.8125rem;       // 13px
+$font-size-base: 0.9375rem;     // 15px
+$font-size-lg: 1.125rem;        // 18px
+$line-height-tight: 1.15;
+$line-height-body: 1.6;
