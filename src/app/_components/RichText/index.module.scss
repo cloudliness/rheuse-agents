@@ -1,0 +1,61 @@
+@use '../../_css/variables' as *;
+
+.richText {
+  font-family: $font-body;
+  font-size: $font-size-base;
+  line-height: $line-height-body;
+  color: $color-text;
+
+  p {
+    margin-bottom: $spacing-md;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $font-heading;
+    font-weight: 400;
+    margin-top: $spacing-xl;
+    margin-bottom: $spacing-md;
+  }
+
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.375rem; }
+
+  ul, ol {
+    padding-left: $spacing-lg;
+    margin-bottom: $spacing-md;
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  li {
+    margin-bottom: $spacing-xs;
+  }
+
+  blockquote {
+    border-left: 3px solid $color-accent;
+    padding-left: $spacing-md;
+    margin: $spacing-lg 0;
+    font-style: italic;
+    color: $color-text-muted;
+  }
+
+  a {
+    color: $color-primary;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover {
+      color: $color-primary-dark;
+    }
+  }
+
+  code {
+    font-size: 0.875em;
+    padding: 0.15em 0.4em;
+    background-color: $color-surface-alt;
+    border: 1px solid $color-border;
+  }
+}

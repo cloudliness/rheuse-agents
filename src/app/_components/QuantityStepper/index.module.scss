@@ -1,0 +1,44 @@
+@use '../../_css/variables' as *;
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid $color-border;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  font-size: $font-size-base;
+  color: $color-text;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background-color: $color-surface-alt;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  font-family: $font-accent;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $color-text;
+  border-left: 1px solid $color-border;
+  border-right: 1px solid $color-border;
+}

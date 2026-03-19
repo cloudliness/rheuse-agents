@@ -1,0 +1,69 @@
+@use '../../_css/variables' as *;
+
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: $spacing-section $spacing-lg;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.heading {
+  font-family: $font-heading;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-xs;
+}
+
+.subtitle {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  margin-bottom: $spacing-2xl;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  text-align: left;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-md;
+}
+
+.error {
+  color: $color-error;
+  font-size: $font-size-sm;
+  text-align: center;
+}
+
+.submit {
+  width: 100%;
+  margin-top: $spacing-sm;
+}
+
+.switch {
+  margin-top: $spacing-lg;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+
+  a {
+    color: $color-primary-dark;
+    text-decoration: underline;
+
+    &:hover {
+      color: $color-text;
+    }
+  }
+}

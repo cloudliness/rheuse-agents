@@ -1,0 +1,85 @@
+@use '../../_css/variables' as *;
+
+.section {
+  padding: $spacing-section $spacing-lg;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: $spacing-2xl;
+  max-width: $max-width;
+  margin: 0 auto;
+  align-items: center;
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+  }
+}
+
+.imageCol {
+  @media (max-width: $bp-tablet) {
+    order: -1;
+  }
+}
+
+.imagePlaceholder {
+  aspect-ratio: 3 / 4;
+  background-color: $color-surface-alt;
+}
+
+.textCol {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.label {
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  color: $color-text-muted;
+}
+
+.heading {
+  font-family: $font-heading;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 400;
+  line-height: $line-height-tight;
+}
+
+.body {
+  font-size: $font-size-base;
+  color: $color-text-muted;
+  line-height: $line-height-body;
+  max-width: 480px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-lg;
+  margin-top: $spacing-lg;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.statTitle {
+  font-family: $font-body;
+  font-size: $font-size-base;
+  font-weight: 600;
+  color: $color-text;
+}
+
+.statDesc {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  line-height: $line-height-body;
+}

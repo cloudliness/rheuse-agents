@@ -1,0 +1,239 @@
+@use '../../_css/variables' as *;
+
+.page {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $spacing-xl $spacing-lg $spacing-section;
+}
+
+.header {
+  margin-bottom: $spacing-2xl;
+}
+
+.heading {
+  font-family: $font-heading;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-xs;
+}
+
+.subtitle {
+  font-size: $font-size-base;
+  color: $color-text-muted;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-lg;
+  padding: $spacing-section 0;
+  color: $color-text-muted;
+  font-size: $font-size-lg;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: $spacing-2xl;
+  align-items: flex-start;
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: $spacing-lg;
+  padding: $spacing-lg 0;
+  border-bottom: 1px solid $color-border;
+
+  &:first-child {
+    padding-top: 0;
+  }
+}
+
+.itemImage {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background-color: $color-surface-alt;
+  overflow: hidden;
+}
+
+.itemDetails {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.itemCategory {
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  color: $color-text-muted;
+}
+
+.itemTitle {
+  font-family: $font-body;
+  font-size: $font-size-base;
+  font-weight: 500;
+  color: $color-text;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.itemActions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+  margin-top: $spacing-sm;
+}
+
+.removeBtn {
+  font-family: $font-accent;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+.itemPrice {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.delivery {
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+  margin-top: $spacing-lg;
+  background-color: $color-surface-alt;
+}
+
+.deliveryIcon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.deliveryTitle {
+  font-family: $font-body;
+  font-size: $font-size-base;
+  font-weight: 600;
+  margin-bottom: $spacing-xs;
+}
+
+.deliveryText {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  line-height: $line-height-body;
+}
+
+// ─── Order Summary Sidebar ─────────────────────────────────────────────────
+
+.summary {
+  border: 1px solid $color-border;
+  padding: $spacing-lg;
+  position: sticky;
+  top: calc(60px + $spacing-lg);
+}
+
+.summaryTitle {
+  font-family: $font-heading;
+  font-size: $font-size-lg;
+  font-weight: 400;
+  margin-bottom: $spacing-lg;
+  padding-bottom: $spacing-md;
+  border-bottom: 1px solid $color-border;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: $spacing-sm 0;
+  font-size: $font-size-sm;
+  color: $color-text;
+}
+
+.summaryNote {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  font-style: italic;
+}
+
+.summaryTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: $spacing-md;
+  margin-top: $spacing-md;
+  border-top: 1px solid $color-border;
+  font-weight: 600;
+}
+
+.totalAmount {
+  text-align: right;
+}
+
+.currency {
+  display: block;
+  font-size: $font-size-label;
+  font-weight: 400;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-label;
+}
+
+.checkoutBtn {
+  width: 100%;
+  margin-top: $spacing-lg;
+}
+
+.secure {
+  text-align: center;
+  font-size: $font-size-label;
+  color: $color-text-muted;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  margin-top: $spacing-md;
+}
+
+.trust {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  margin-top: $spacing-lg;
+  padding-top: $spacing-md;
+  border-top: 1px solid $color-border;
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-size: $font-size-sm;
+  color: $color-text;
+}

@@ -33,22 +33,36 @@ src/
 ├── app/
 │   ├── _css/                      # Global SCSS variables & reset
 │   ├── _components/               # Shared UI components
+│   │   ├── AddToCartButton/       # Add-to-cart with feedback animation
 │   │   ├── Button/                # Filled + outlined variants
-│   │   ├── Input/                 # Form input with label + error
-│   │   ├── Media/                 # Responsive image (next/image)
-│   │   ├── Price/                 # Currency formatter (cents → display)
-│   │   ├── EcoImpactBadge/        # Recycled % + CO₂ saved badge
-│   │   ├── Header/                # Site header (nav + cart + account)
-│   │   ├── Footer/                # Columns + social + copyright
-│   │   ├── Hero/                  # Hero banner with CTAs
 │   │   ├── Card/                  # Product card with eco badge
 │   │   ├── CartLink/              # Cart icon with item count badge
 │   │   ├── Categories/            # Category grid with image overlays
-│   │   └── Newsletter/            # Email signup section
+│   │   ├── EcoImpactBadge/        # Recycled % + CO₂ saved badge
+│   │   ├── Footer/                # Columns + social + copyright
+│   │   ├── Header/                # Site header (nav + cart + account)
+│   │   ├── Hero/                  # Hero banner with CTAs
+│   │   ├── Input/                 # Form input with label + error
+│   │   ├── Media/                 # Responsive image (next/image)
+│   │   ├── MissionSection/        # Brand story editorial section
+│   │   ├── Newsletter/            # Email signup section
+│   │   ├── Price/                 # Currency formatter (cents → display)
+│   │   ├── QuantityStepper/       # +/- quantity control
+│   │   └── RichText/              # Payload Lexical content renderer
 │   ├── _providers/                # React context providers
 │   │   ├── Cart/                  # Cart state (localStorage persisted)
 │   │   ├── Auth/                  # User auth via Payload API
 │   │   └── index.tsx              # Combined provider wrapper
+│   ├── (pages)/                   # Route group for all pages
+│   │   ├── [slug]/                # Dynamic CMS pages
+│   │   ├── account/               # User profile (protected)
+│   │   ├── cart/                   # Shopping cart
+│   │   ├── checkout/              # Checkout with shipping form
+│   │   ├── create-account/        # Registration
+│   │   ├── login/                 # Sign in
+│   │   ├── order-confirmation/    # Post-purchase thank you
+│   │   ├── orders/                # Order history (protected)
+│   │   └── products/              # Product listing + [slug] detail
 │   ├── layout.tsx                 # Root layout (fonts, metadata, providers)
 │   ├── page.tsx                   # Home page
 │   └── page.module.scss           # Home page styles
@@ -81,7 +95,7 @@ This project is built **one phase at a time**. Each phase completes fully, the R
 - `"ask the superintendent [question]"` — Get answers about what's built
 - `"catch me up"` — Full context restoration after a token reset
 
-**Current Phase:** Phase 4 (Complete) → **Phase 5 next**
+**Current Phase:** Phase 5 (Complete) → **Phase 6 next**
 
 ## What's Been Done
 
@@ -184,18 +198,27 @@ All reusable UI components, layout components, and state providers are in place.
 
 ---
 
+### Phase 5: Pages & Routes (Complete)
+
+All frontend pages and routes are built with server-side data fetching and client-side interactivity.
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Home page (`/`) | ✅ | Hero, MissionSection, Categories grid, Newsletter |
+| Products listing (`/products`) | ✅ | Server component, Payload API fetch, 3-column grid, empty state |
+| Product detail (`/products/[slug]`) | ✅ | Image gallery, eco data, materials, certifications, AddToCartButton |
+| Cart (`/cart`) | ✅ | Line items with QuantityStepper, Order Summary sidebar, trust badges |
+| Checkout (`/checkout`) | ✅ | Shipping form (Input components), order review sidebar, Stripe placeholder |
+| Order confirmation (`/order-confirmation`) | ✅ | Thank you, order details, eco impact message |
+| Login (`/login`) | ✅ | Email/password form, useAuth provider, redirect to account |
+| Register (`/create-account`) | ✅ | Full registration form, auto-login after creation |
+| Account (`/account`) | ✅ | Protected profile page, order history link, logout |
+| Orders (`/orders`) | ✅ | Protected order list, date/status/total, links to confirmation |
+| Dynamic CMS pages (`/[slug]`) | ✅ | Fetches from Payload Pages collection, RichText renderer, Hero support |
+
+---
+
 ## Next Steps
-
-### Phase 5: Pages & Routes
-
-- [ ] Home page (`/`)
-- [ ] Products listing (`/products`)
-- [ ] Product detail (`/products/[slug]`)
-- [ ] Cart (`/cart`)
-- [ ] Checkout (`/checkout`)
-- [ ] Order confirmation (`/order-confirmation`)
-- [ ] Login / Register / Account / Orders
-- [ ] Dynamic CMS pages (`/[slug]`)
 
 ### Phase 6: Payments & Checkout
 
@@ -257,4 +280,4 @@ Admin dashboard: `http://localhost:3000/admin`
 
 ---
 
-*Last updated: March 19, 2026 — Phase 4 complete (core components & providers)*
+*Last updated: Phase 5 complete (all pages & routes)*

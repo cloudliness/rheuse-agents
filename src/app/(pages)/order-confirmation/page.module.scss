@@ -1,0 +1,143 @@
+@use '../../_css/variables' as *;
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: $spacing-section $spacing-lg;
+  text-align: center;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-lg;
+  color: $color-text-muted;
+}
+
+.hero {
+  margin-bottom: $spacing-2xl;
+}
+
+.checkmark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: $color-primary-dark;
+  color: $color-white;
+  font-size: 1.5rem;
+  margin-bottom: $spacing-lg;
+}
+
+.heading {
+  font-family: $font-heading;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-sm;
+}
+
+.subtitle {
+  font-size: $font-size-base;
+  color: $color-text-muted;
+}
+
+// ─── Order Card ─────────────────────────────────────────────────────────────
+
+.card {
+  border: 1px solid $color-border;
+  padding: $spacing-lg;
+  text-align: left;
+  margin-bottom: $spacing-2xl;
+}
+
+.cardTitle {
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  padding-bottom: $spacing-sm;
+  margin-bottom: $spacing-md;
+  border-bottom: 1px solid $color-border;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: $font-size-sm;
+}
+
+.itemInfo {
+  display: flex;
+  gap: $spacing-xs;
+}
+
+.itemName {
+  font-weight: 500;
+}
+
+.itemQty {
+  color: $color-text-muted;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  padding-top: $spacing-md;
+  margin-top: $spacing-md;
+  border-top: 1px solid $color-border;
+}
+
+// ─── Impact ─────────────────────────────────────────────────────────────────
+
+.impact {
+  background-color: $color-surface-alt;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-2xl;
+  text-align: left;
+}
+
+.impactTitle {
+  font-family: $font-body;
+  font-size: $font-size-base;
+  font-weight: 600;
+  margin-bottom: $spacing-xs;
+}
+
+.impactText {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  line-height: $line-height-body;
+}
+
+// ─── Actions ────────────────────────────────────────────────────────────────
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.link {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  text-decoration: underline;
+
+  &:hover {
+    color: $color-text;
+  }
+}

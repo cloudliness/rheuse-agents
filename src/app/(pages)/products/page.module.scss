@@ -1,0 +1,58 @@
+@use '../../_css/variables' as *;
+
+.page {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $spacing-section $spacing-lg;
+}
+
+.header {
+  margin-bottom: $spacing-section;
+}
+
+.label {
+  display: block;
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  margin-bottom: $spacing-sm;
+}
+
+.heading {
+  font-family: $font-heading;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-md;
+}
+
+.description {
+  font-size: $font-size-base;
+  color: $color-text-muted;
+  max-width: 480px;
+  line-height: $line-height-body;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-xl $spacing-lg;
+
+  @media (max-width: $bp-desktop) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.empty {
+  text-align: center;
+  padding: $spacing-section 0;
+  color: $color-text-muted;
+  font-size: $font-size-lg;
+}

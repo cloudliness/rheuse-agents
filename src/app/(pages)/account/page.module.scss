@@ -1,0 +1,117 @@
+@use '../../_css/variables' as *;
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: $spacing-xl $spacing-lg $spacing-section;
+}
+
+.loading {
+  text-align: center;
+  color: $color-text-muted;
+  padding: $spacing-section 0;
+}
+
+.heading {
+  font-family: $font-heading;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-2xl;
+}
+
+// ─── Profile Card ───────────────────────────────────────────────────────────
+
+.card {
+  border: 1px solid $color-border;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-2xl;
+}
+
+.cardTitle {
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  padding-bottom: $spacing-sm;
+  margin-bottom: $spacing-md;
+  border-bottom: 1px solid $color-border;
+}
+
+.field {
+  display: flex;
+  justify-content: space-between;
+  padding: $spacing-sm 0;
+  font-size: $font-size-sm;
+
+  & + & {
+    border-top: 1px solid rgba($color-border, 0.5);
+  }
+}
+
+.label {
+  color: $color-text-muted;
+}
+
+.value {
+  font-weight: 500;
+}
+
+// ─── Links ──────────────────────────────────────────────────────────────────
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  margin-bottom: $spacing-2xl;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+  border: 1px solid $color-border;
+  text-decoration: none;
+  color: $color-text;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: $color-primary-dark;
+  }
+}
+
+.linkIcon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.linkTitle {
+  font-family: $font-body;
+  font-size: $font-size-base;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.linkDesc {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}
+
+// ─── Logout ─────────────────────────────────────────────────────────────────
+
+.logout {
+  font-family: $font-accent;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    color: $color-text;
+  }
+}

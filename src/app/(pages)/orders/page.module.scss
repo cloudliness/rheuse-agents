@@ -1,0 +1,83 @@
+@use '../../_css/variables' as *;
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: $spacing-xl $spacing-lg $spacing-section;
+}
+
+.loading {
+  text-align: center;
+  color: $color-text-muted;
+  padding: $spacing-section 0;
+}
+
+.heading {
+  font-family: $font-heading;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-2xl;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-lg;
+  padding: $spacing-section 0;
+  color: $color-text-muted;
+  text-align: center;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.order {
+  display: block;
+  border: 1px solid $color-border;
+  padding: $spacing-lg;
+  text-decoration: none;
+  color: $color-text;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: $color-primary-dark;
+  }
+}
+
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: $spacing-sm;
+}
+
+.orderNumber {
+  font-weight: 600;
+  font-size: $font-size-base;
+}
+
+.orderStatus {
+  font-family: $font-accent;
+  font-size: $font-size-label;
+  font-weight: 500;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  color: $color-text-muted;
+}
+
+.orderFooter {
+  display: flex;
+  justify-content: space-between;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}
+
+.orderDate {
+  color: $color-text-muted;
+}
