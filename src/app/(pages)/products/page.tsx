@@ -1,6 +1,19 @@
 import React from 'react'
+import type { Metadata } from 'next'
 import { Card } from '@/app/_components/Card'
 import classes from './page.module.scss'
+
+export const metadata: Metadata = {
+  title: 'Shop All Products',
+  description:
+    'Browse our full collection of sustainable, eco-friendly utensils and kitchenware. Made from recycled and natural materials, zero single-use plastic.',
+  openGraph: {
+    title: 'Shop All Eco-Friendly Products | RHEUSE',
+    description:
+      'Browse our full collection of sustainable, eco-friendly utensils and kitchenware.',
+    type: 'website',
+  },
+}
 
 // TODO: Replace with Payload CMS query in production
 async function getProducts() {

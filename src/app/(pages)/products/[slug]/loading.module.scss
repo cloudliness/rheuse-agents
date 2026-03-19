@@ -1,0 +1,78 @@
+@use '../../../../_css/variables' as *;
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+%skeleton {
+  background: linear-gradient(
+    90deg,
+    $color-border 25%,
+    darken($color-border, 4%) 50%,
+    $color-border 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.page {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $spacing-2xl $spacing-lg;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-2xl;
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.imagePlaceholder {
+  @extend %skeleton;
+  aspect-ratio: 1;
+  width: 100%;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.skeletonCategory {
+  @extend %skeleton;
+  height: 0.75rem;
+  width: 80px;
+}
+
+.skeletonTitle {
+  @extend %skeleton;
+  height: 2rem;
+  width: 70%;
+}
+
+.skeletonPrice {
+  @extend %skeleton;
+  height: 1.5rem;
+  width: 100px;
+}
+
+.skeletonBlock {
+  @extend %skeleton;
+  height: 4rem;
+  width: 100%;
+}
+
+.skeletonBtn {
+  @extend %skeleton;
+  height: 3rem;
+  width: 180px;
+}

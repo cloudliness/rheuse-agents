@@ -1,0 +1,85 @@
+@use '../../../_css/variables' as *;
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+%skeleton {
+  background: linear-gradient(
+    90deg,
+    $color-border 25%,
+    darken($color-border, 4%) 50%,
+    $color-border 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.page {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $spacing-2xl $spacing-lg;
+}
+
+.header {
+  margin-bottom: $spacing-2xl;
+  text-align: center;
+}
+
+.skeletonTitle {
+  @extend %skeleton;
+  height: 2.5rem;
+  width: 240px;
+  margin: 0 auto $spacing-sm;
+}
+
+.skeletonSubtitle {
+  @extend %skeleton;
+  height: 1rem;
+  width: 160px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-lg;
+
+  @media (max-width: $bp-desktop) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardImage {
+  @extend %skeleton;
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  margin-bottom: $spacing-sm;
+}
+
+.cardBody {
+  padding: $spacing-sm 0;
+}
+
+.skeletonLine {
+  @extend %skeleton;
+  height: 1rem;
+  width: 80%;
+  margin-bottom: $spacing-xs;
+}
+
+.skeletonLineShort {
+  @extend %skeleton;
+  height: 1rem;
+  width: 40%;
+}

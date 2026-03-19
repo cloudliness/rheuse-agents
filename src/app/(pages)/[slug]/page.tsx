@@ -14,6 +14,11 @@ type Page = {
     image?: { url?: string; alt?: string }
   }
   content?: Record<string, unknown>
+  meta?: {
+    title?: string
+    description?: string
+    image?: { url?: string; alt?: string }
+  }
 }
 
 async function getPage(slug: string): Promise<Page | null> {
@@ -38,8 +43,21 @@ export async function generateMetadata({
   const { slug } = await params
   const page = await getPage(slug)
 
+  if (!page) return { title: 'Page Not Found' }
+
+  const ogImages = page.meta?.image?.url
+    ? [{ url: page.meta.image.url, alt: page.meta.title || page.title }]
+    : undefined
+
   return {
-    title: page?.title || 'Page Not Found',
+    title: page.meta?.title || page.title,
+    description: page.meta?.description,
+    openGraph: {
+      title: page.meta?.title || page.title,
+      description: page.meta?.description,
+      type: 'website' as const,
+      images: ogImages,
+    },
   }
 }
 
@@ -53,8 +71,39 @@ export default async function CMSPage({
 
   if (!page) notFound()
 
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://rheuse.com'
+
+  const webPageJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        name: page!.meta?.title || page!.title,
+        description: page!.meta?.description,
+        url: `${appUrl}/${page!.slug}`,
+        isPartOf: { '@id': `${appUrl}/#website` },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: appUrl },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: page!.title,
+            item: `${appUrl}/${page!.slug}`,
+          },
+        ],
+      },
+    ],
+  }
+
   return (
     <article className={classes.page}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+      />
       {page.hero?.heading ? (
         <Hero
           heading={page.hero.heading}

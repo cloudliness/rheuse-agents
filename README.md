@@ -64,21 +64,21 @@ src/
 │   │   ├── Auth/                  # User auth via Payload API
 │   │   └── index.tsx              # Combined provider wrapper
 │   ├── (pages)/                   # Route group for all pages
-│   │   ├── [slug]/                # Dynamic CMS pages
-│   │   ├── account/               # User profile (protected)
-│   │   ├── cart/                   # Shopping cart
-│   │   ├── checkout/              # Checkout with shipping form
-│   │   ├── create-account/        # Registration
-│   │   ├── login/                 # Sign in
-│   │   ├── order-confirmation/    # Post-purchase thank you
-│   │   ├── orders/                # Order history (protected)
-│   │   └── products/              # Product listing + [slug] detail
+│   │   ├── [slug]/                # Dynamic CMS pages (layout.tsx + page.tsx + generateMetadata)
+│   │   ├── account/               # User profile (protected) + layout.tsx (noindex)
+│   │   ├── cart/                   # Shopping cart + layout.tsx (noindex)
+│   │   ├── checkout/              # Checkout with shipping form + layout.tsx (noindex)
+│   │   ├── create-account/        # Registration + layout.tsx
+│   │   ├── login/                 # Sign in + layout.tsx
+│   │   ├── order-confirmation/    # Post-purchase thank you (noindex)
+│   │   ├── orders/                # Order history (protected) + layout.tsx (noindex)
+│   │   └── products/              # listing (loading.tsx) + [slug] (loading.tsx + generateMetadata + JSON-LD)
 │   ├── api/                       # Next.js API routes
 │   │   ├── create-payment-intent/ # Stripe payment intent creation
 │   │   └── stripe-webhooks/       # Stripe webhook handler
 │   ├── layout.tsx                 # Root layout (fonts, metadata, providers)
-│   ├── page.tsx                   # Home page
-│   └── page.module.scss           # Home page styles
+│   ├── page.tsx                   # Home page (metadata + WebSite/Organization JSON-LD)
+│   └── sitemap.ts                 # Dynamic sitemap (static + products + CMS pages)
 └── payload/
     ├── payload.config.ts          # Payload CMS configuration
     ├── access/
@@ -108,7 +108,7 @@ This project is built **one phase at a time**. Each phase completes fully, the R
 - `"ask the superintendent [question]"` — Get answers about what's built
 - `"catch me up"` — Full context restoration after a token reset
 
-**Current Phase:** Phase 7 (Complete) → **Phase 8 next**
+**Current Phase:** Phase 8 (Complete) → **Phase 9 next**
 
 ## What's Been Done
 
@@ -266,13 +266,16 @@ Eco-focused differentiating features that make RHEUSE more than a generic store.
 
 ## Next Steps
 
-### Phase 8: SEO & Performance
+### Phase 8: SEO & Performance (Complete)
 
-- [ ] `generateMetadata()` on all pages
-- [ ] JSON-LD structured data
-- [ ] Sitemap generation
-- [ ] `next/image` optimization
-- [ ] Suspense boundaries
+| Item | Status | Notes |
+|------|--------|-------|
+| `generateMetadata()` — server pages | ✅ | Home, Products, Product detail (dynamic), CMS pages (expanded), Order confirmation (noindex) |
+| `generateMetadata()` — client pages | ✅ | Per-route `layout.tsx` for Login, Create Account, Cart, Checkout, Account, Orders |
+| JSON-LD structured data | ✅ | `WebSite`+`Organization` on `/`; `Product`+`Offer`+`BreadcrumbList` on product detail; `WebPage`+`BreadcrumbList` on CMS pages |
+| Sitemap | ✅ | `app/sitemap.ts` — static routes + dynamic products + CMS pages from Payload API |
+| Suspense boundaries | ✅ | `loading.tsx` for `/products` + `/products/[slug]` (shimmer skeletons); `<Suspense>` around `ProductActions` |
+| Private pages noindexed | ✅ | Cart, Checkout, Order Confirmation, Account, Orders all have `robots: { index: false }` |
 
 ### Phase 9: Docker & Deployment
 
@@ -309,4 +312,4 @@ Admin dashboard: `http://localhost:3000/admin`
 
 ---
 
-*Last updated: Phase 7 complete (RHEUSE eco features & differentiators)*
+*Last updated: Phase 8 complete (SEO, metadata, JSON-LD, sitemap, Suspense)*

@@ -1,9 +1,15 @@
 import React from 'react'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Price } from '@/app/_components/Price'
 import { Button } from '@/app/_components/Button'
 import { ImpactReceipt } from '@/app/_components/ImpactReceipt'
 import classes from './page.module.scss'
+
+export const metadata: Metadata = {
+  title: 'Order Confirmed',
+  robots: { index: false, follow: false },
+}
 
 type OrderItem = {
   product:
