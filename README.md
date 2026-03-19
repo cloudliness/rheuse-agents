@@ -46,9 +46,13 @@ src/
 │   │   ├── Media/                 # Responsive image (next/image)
 │   │   ├── MissionSection/        # Brand story editorial section
 │   │   ├── Newsletter/            # Email signup section
+│   │   ├── PaymentForm/           # Stripe Elements payment form
 │   │   ├── Price/                 # Currency formatter (cents → display)
 │   │   ├── QuantityStepper/       # +/- quantity control
 │   │   └── RichText/              # Payload Lexical content renderer
+│   ├── _utilities/                # Shared utilities
+│   │   ├── stripe.ts              # Server-side Stripe instance
+│   │   └── getStripe.ts           # Client-side Stripe loader
 │   ├── _providers/                # React context providers
 │   │   ├── Cart/                  # Cart state (localStorage persisted)
 │   │   ├── Auth/                  # User auth via Payload API
@@ -63,6 +67,9 @@ src/
 │   │   ├── order-confirmation/    # Post-purchase thank you
 │   │   ├── orders/                # Order history (protected)
 │   │   └── products/              # Product listing + [slug] detail
+│   ├── api/                       # Next.js API routes
+│   │   ├── create-payment-intent/ # Stripe payment intent creation
+│   │   └── stripe-webhooks/       # Stripe webhook handler
 │   ├── layout.tsx                 # Root layout (fonts, metadata, providers)
 │   ├── page.tsx                   # Home page
 │   └── page.module.scss           # Home page styles
@@ -95,7 +102,7 @@ This project is built **one phase at a time**. Each phase completes fully, the R
 - `"ask the superintendent [question]"` — Get answers about what's built
 - `"catch me up"` — Full context restoration after a token reset
 
-**Current Phase:** Phase 5 (Complete) → **Phase 6 next**
+**Current Phase:** Phase 6 (Complete) → **Phase 7 next**
 
 ## What's Been Done
 
@@ -218,15 +225,24 @@ All frontend pages and routes are built with server-side data fetching and clien
 
 ---
 
+### Phase 6: Payments & Checkout (Complete)
+
+Stripe payment processing fully integrated with server-side price validation.
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Stripe utilities | ✅ | Server (`stripe.ts`) + client (`getStripe.ts`) Stripe instances |
+| Payment intent API | ✅ | `/api/create-payment-intent` — validates prices from DB, checks stock, supports carbon offset |
+| Stripe Elements | ✅ | `PaymentForm` component with `PaymentElement`, themed to match brand |
+| Webhook handler | ✅ | `/api/stripe-webhooks` — signature verification, order creation on `payment_intent.succeeded` |
+| Checkout rewrite | ✅ | 2-step flow (shipping → payment), Stripe Elements integration replaces placeholder |
+| Carbon-neutral shipping | ✅ | $1.99 carbon offset toggle at checkout, persisted to order via `carbonOffset` field |
+| Order confirmation | ✅ | Now supports lookup by payment intent ID (`?pi=`) |
+| Client packages | ✅ | `@stripe/stripe-js` + `@stripe/react-stripe-js` installed |
+
+---
+
 ## Next Steps
-
-### Phase 6: Payments & Checkout
-
-- [ ] Stripe payment intent API route
-- [ ] Checkout form with Stripe Elements
-- [ ] Webhook handler for payment confirmation
-- [ ] Order creation on successful payment
-- [ ] Carbon-neutral shipping option
 
 ### Phase 7: RHEUSE Features
 
@@ -280,4 +296,4 @@ Admin dashboard: `http://localhost:3000/admin`
 
 ---
 
-*Last updated: Phase 5 complete (all pages & routes)*
+*Last updated: Phase 6 complete (Stripe payments & checkout)*

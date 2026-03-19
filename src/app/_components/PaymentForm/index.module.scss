@@ -1,0 +1,29 @@
+@use '../../_css/variables' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.error {
+  color: $color-error;
+  font-size: $font-size-sm;
+  text-align: center;
+}
+
+.submit {
+  width: 100%;
+  margin-top: $spacing-sm;
+}
+
+.secure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  font-size: $font-size-label;
+  color: $color-text-muted;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+}

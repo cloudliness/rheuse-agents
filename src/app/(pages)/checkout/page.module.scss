@@ -66,16 +66,36 @@
   gap: $spacing-md;
 }
 
-.paymentPlaceholder {
-  padding: $spacing-lg;
-  background-color: $color-surface-alt;
-  text-align: center;
-  color: $color-text-muted;
-}
-
 .paymentNote {
   font-size: $font-size-sm;
   margin-top: $spacing-xs;
+}
+
+.continueBtn {
+  width: 100%;
+  margin-top: $spacing-lg;
+}
+
+.backBtn {
+  font-family: $font-body;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: $spacing-lg;
+  padding: 0;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+.loading {
+  padding: $spacing-lg;
+  text-align: center;
+  color: $color-text-muted;
+  font-style: italic;
 }
 
 .error {
@@ -150,7 +170,38 @@
   border-top: 1px solid $color-border;
 }
 
-.placeOrder {
-  width: 100%;
-  margin-top: $spacing-lg;
+// ─── Carbon Offset Toggle ────────────────────────────────────────────────
+
+.carbonToggle {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  margin: $spacing-sm 0;
+  background-color: $color-surface-alt;
+  cursor: pointer;
+  user-select: none;
+}
+
+.carbonCheckbox {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: $color-primary-dark;
+}
+
+.carbonInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.carbonLabel {
+  font-size: $font-size-sm;
+  font-weight: 500;
+}
+
+.carbonDesc {
+  font-size: $font-size-label;
+  color: $color-text-muted;
 }

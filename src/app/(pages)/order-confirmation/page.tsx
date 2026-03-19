@@ -31,13 +31,33 @@ async function getOrder(id: string): Promise<Order | null> {
   }
 }
 
+async function getOrderByPaymentIntent(pi: string): Promise<Order | null> {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/orders?where[stripePaymentIntentID][equals]=${encodeURIComponent(pi)}&depth=1&limit=1`,
+      { cache: 'no-store' },
+    )
+    if (!res.ok) return null
+    const data = await res.json()
+    return data.docs?.[0] || null
+  } catch {
+    return null
+  }
+}
+
 export default async function OrderConfirmationPage({
   searchParams,
 }: {
-  searchParams: Promise<{ id?: string }>
+  searchParams: Promise<{ id?: string; pi?: string }>
 }) {
-  const { id } = await searchParams
-  const order = id ? await getOrder(id) : null
+  const { id, pi } = await searchParams
+
+  let order: Order | null = null
+  if (id) {
+    order = await getOrder(id)
+  } else if (pi) {
+    order = await getOrderByPaymentIntent(pi)
+  }
 
   if (!order) {
     return (

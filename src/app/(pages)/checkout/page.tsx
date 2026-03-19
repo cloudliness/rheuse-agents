@@ -1,13 +1,18 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
+import { Elements } from '@stripe/react-stripe-js'
 import { useCart } from '@/app/_providers/Cart'
 import { useAuth } from '@/app/_providers/Auth'
 import { Input } from '@/app/_components/Input'
 import { Price } from '@/app/_components/Price'
 import { Button } from '@/app/_components/Button'
+import { PaymentForm } from '@/app/_components/PaymentForm'
+import stripePromise from '@/app/_utilities/getStripe'
 import classes from './page.module.scss'
+
+const CARBON_OFFSET_FEE = 199
 
 export default function CheckoutPage() {
   const { cart, total, itemCount, clearCart } = useCart()
@@ -24,57 +29,68 @@ export default function CheckoutPage() {
     zip: '',
     country: 'US',
   })
-  const [submitting, setSubmitting] = useState(false)
+  const [carbonOffset, setCarbonOffset] = useState(false)
+  const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [step, setStep] = useState<'shipping' | 'payment'>('shipping')
+
+  const orderTotal = carbonOffset ? total + CARBON_OFFSET_FEE : total
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitting(true)
+  // Create payment intent when moving to payment step
+  const proceedToPayment = useCallback(async () => {
     setError(null)
 
     try {
-      const res = await fetch('/api/orders', {
+      const res = await fetch('/api/create-payment-intent', {
         method: 'POST',
-        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           items: cart.items.map((i) => ({
-            product: i.product.id,
+            productId: i.product.id,
             quantity: i.quantity,
-            price: i.product.price,
           })),
-          total,
-          shippingAddress: {
-            firstName: form.firstName,
-            lastName: form.lastName,
-            address: form.address,
-            city: form.city,
-            state: form.state,
-            zip: form.zip,
-            country: form.country,
-          },
-          customerEmail: form.email,
+          carbonOffset,
         }),
       })
 
+      const data = await res.json()
+
       if (!res.ok) {
-        const data = await res.json()
-        throw new Error(data.errors?.[0]?.message || 'Order could not be placed')
+        throw new Error(data.error || 'Failed to initialize payment')
       }
 
-      const data = await res.json()
-      clearCart()
-      router.push(`/order-confirmation?id=${data.doc.id}`)
+      setClientSecret(data.clientSecret)
+      setStep('payment')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong')
-    } finally {
-      setSubmitting(false)
     }
+  }, [cart.items, carbonOffset])
+
+  // Re-create payment intent if carbon offset changes while on payment step
+  useEffect(() => {
+    if (step === 'payment') {
+      setClientSecret(null)
+      proceedToPayment()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [carbonOffset])
+
+  const handleShippingSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    proceedToPayment()
   }
+
+  const handlePaymentSuccess = useCallback(
+    (paymentIntentId: string) => {
+      clearCart()
+      router.push(`/order-confirmation?pi=${paymentIntentId}`)
+    },
+    [clearCart, router],
+  )
 
   if (itemCount === 0) {
     return (
@@ -92,81 +108,125 @@ export default function CheckoutPage() {
     <div className={classes.page}>
       <h1 className={classes.heading}>Checkout</h1>
 
-      <form onSubmit={handleSubmit} className={classes.layout}>
+      <div className={classes.layout}>
         <div className={classes.form}>
-          <section className={classes.section}>
-            <h2 className={classes.sectionTitle}>Contact</h2>
-            <Input
-              name="email"
-              label="Email"
-              type="email"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
-          </section>
+          {/* Step 1: Shipping */}
+          {step === 'shipping' && (
+            <form onSubmit={handleShippingSubmit}>
+              <section className={classes.section}>
+                <h2 className={classes.sectionTitle}>Contact</h2>
+                <Input
+                  name="email"
+                  label="Email"
+                  type="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                />
+              </section>
 
-          <section className={classes.section}>
-            <h2 className={classes.sectionTitle}>Shipping Address</h2>
-            <div className={classes.row}>
-              <Input
-                name="firstName"
-                label="First Name"
-                value={form.firstName}
-                onChange={handleChange}
-                required
-              />
-              <Input
-                name="lastName"
-                label="Last Name"
-                value={form.lastName}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <Input
-              name="address"
-              label="Address"
-              value={form.address}
-              onChange={handleChange}
-              required
-            />
-            <div className={classes.row}>
-              <Input
-                name="city"
-                label="City"
-                value={form.city}
-                onChange={handleChange}
-                required
-              />
-              <Input
-                name="state"
-                label="State"
-                value={form.state}
-                onChange={handleChange}
-                required
-              />
-              <Input
-                name="zip"
-                label="ZIP"
-                value={form.zip}
-                onChange={handleChange}
-                required
-              />
-            </div>
-          </section>
+              <section className={classes.section}>
+                <h2 className={classes.sectionTitle}>Shipping Address</h2>
+                <div className={classes.row}>
+                  <Input
+                    name="firstName"
+                    label="First Name"
+                    value={form.firstName}
+                    onChange={handleChange}
+                    required
+                  />
+                  <Input
+                    name="lastName"
+                    label="Last Name"
+                    value={form.lastName}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <Input
+                  name="address"
+                  label="Address"
+                  value={form.address}
+                  onChange={handleChange}
+                  required
+                />
+                <div className={classes.row}>
+                  <Input
+                    name="city"
+                    label="City"
+                    value={form.city}
+                    onChange={handleChange}
+                    required
+                  />
+                  <Input
+                    name="state"
+                    label="State"
+                    value={form.state}
+                    onChange={handleChange}
+                    required
+                  />
+                  <Input
+                    name="zip"
+                    label="ZIP"
+                    value={form.zip}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </section>
 
-          <section className={classes.section}>
-            <h2 className={classes.sectionTitle}>Payment</h2>
-            <div className={classes.paymentPlaceholder}>
-              <p>Stripe integration coming in Phase 6.</p>
-              <p className={classes.paymentNote}>
-                Orders are currently placed without payment processing.
-              </p>
-            </div>
-          </section>
+              {error && <p className={classes.error}>{error}</p>}
 
-          {error && <p className={classes.error}>{error}</p>}
+              <Button
+                label="Continue to Payment"
+                variant="filled"
+                type="submit"
+                className={classes.continueBtn}
+              />
+            </form>
+          )}
+
+          {/* Step 2: Payment */}
+          {step === 'payment' && (
+            <div>
+              <button
+                type="button"
+                onClick={() => setStep('shipping')}
+                className={classes.backBtn}
+              >
+                ← Back to Shipping
+              </button>
+
+              <section className={classes.section}>
+                <h2 className={classes.sectionTitle}>Payment</h2>
+
+                {clientSecret ? (
+                  <Elements
+                    stripe={stripePromise}
+                    options={{
+                      clientSecret,
+                      appearance: {
+                        theme: 'stripe',
+                        variables: {
+                          colorPrimary: '#1F4D38',
+                          fontFamily: 'Inter, sans-serif',
+                          borderRadius: '0px',
+                        },
+                      },
+                    }}
+                  >
+                    <PaymentForm onSuccess={handlePaymentSuccess} />
+                  </Elements>
+                ) : (
+                  <div className={classes.loading}>
+                    Initializing secure payment…
+                  </div>
+                )}
+              </section>
+
+              {error && <p className={classes.error}>{error}</p>}
+            </div>
+          )}
         </div>
 
         <aside className={classes.summary}>
@@ -192,23 +252,32 @@ export default function CheckoutPage() {
             <span>Subtotal</span>
             <Price amount={total} />
           </div>
-          <div className={classes.summaryRow}>
-            <span>Shipping</span>
-            <span className={classes.summaryNote}>Calculated next</span>
-          </div>
+
+          {/* Carbon-neutral shipping toggle */}
+          <label className={classes.carbonToggle}>
+            <input
+              type="checkbox"
+              checked={carbonOffset}
+              onChange={(e) => setCarbonOffset(e.target.checked)}
+              className={classes.carbonCheckbox}
+            />
+            <div className={classes.carbonInfo}>
+              <span className={classes.carbonLabel}>
+                🌱 Carbon-Neutral Shipping
+              </span>
+              <span className={classes.carbonDesc}>
+                Offset your delivery&apos;s carbon footprint
+              </span>
+            </div>
+            <Price amount={CARBON_OFFSET_FEE} />
+          </label>
+
           <div className={classes.summaryTotal}>
             <span>Total</span>
-            <Price amount={total} />
+            <Price amount={orderTotal} />
           </div>
-
-          <Button
-            label={submitting ? 'Placing Order…' : 'Place Order'}
-            variant="filled"
-            className={classes.placeOrder}
-            type="submit"
-          />
         </aside>
-      </form>
+      </div>
     </div>
   )
 }
