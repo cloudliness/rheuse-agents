@@ -75,7 +75,8 @@ src/
 │   │   └── products/              # listing (loading.tsx) + [slug] (loading.tsx + generateMetadata + JSON-LD)
 │   ├── api/                       # Next.js API routes
 │   │   ├── create-payment-intent/ # Stripe payment intent creation
-│   │   └── stripe-webhooks/       # Stripe webhook handler
+│   │   ├── stripe-webhooks/       # Stripe webhook handler
+│   │   └── health/                # Docker health check endpoint
 │   ├── layout.tsx                 # Root layout (fonts, metadata, providers)
 │   ├── page.tsx                   # Home page (metadata + WebSite/Organization JSON-LD)
 │   └── sitemap.ts                 # Dynamic sitemap (static + products + CMS pages)
@@ -108,7 +109,7 @@ This project is built **one phase at a time**. Each phase completes fully, the R
 - `"ask the superintendent [question]"` — Get answers about what's built
 - `"catch me up"` — Full context restoration after a token reset
 
-**Current Phase:** Phase 8 (Complete) → **Phase 9 next**
+**Current Phase:** Phase 9 (Complete) — **All phases finished!**
 
 ## What's Been Done
 
@@ -277,14 +278,18 @@ Eco-focused differentiating features that make RHEUSE more than a generic store.
 | Suspense boundaries | ✅ | `loading.tsx` for `/products` + `/products/[slug]` (shimmer skeletons); `<Suspense>` around `ProductActions` |
 | Private pages noindexed | ✅ | Cart, Checkout, Order Confirmation, Account, Orders all have `robots: { index: false }` |
 
-### Phase 9: Docker & Deployment
+### Phase 9: Docker & Deployment (Complete)
 
-- [ ] Create `Dockerfile` (multi-stage)
-- [ ] Create `docker-compose.yml` (dev)
-- [ ] Create `docker-compose.prod.yml` (production)
-- [ ] Create `.dockerignore`
-- [ ] Health check endpoint (`/api/health`)
-- [ ] Test full stack locally with Docker
+Full Docker containerization for development and production.
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Dockerfile | ✅ | Multi-stage (deps → builder → runner), node:22-alpine, npm ci, non-root user |
+| docker-compose.yml | ✅ | Dev stack: app (hot reload via volume mount) + MongoDB 7, health checks |
+| docker-compose.prod.yml | ✅ | Production: lean runner target, build args, app health check, no exposed MongoDB port, auth credentials |
+| .dockerignore | ✅ | Excludes node_modules, .next, .git, .env*, *.md, coverage |
+| Health check endpoint | ✅ | `/api/health` returns `{ status: 'ok', timestamp }` |
+| Standalone output | ✅ | `output: 'standalone'` already set in next.config.mjs |
 
 ---
 
@@ -312,4 +317,4 @@ Admin dashboard: `http://localhost:3000/admin`
 
 ---
 
-*Last updated: Phase 8 complete (SEO, metadata, JSON-LD, sitemap, Suspense)*
+*Last updated: Phase 9 complete (Docker & Deployment — all 9 phases done)*

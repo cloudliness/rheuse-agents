@@ -1,0 +1,46 @@
+services:
+  app:
+    build:
+      context: .
+      target: deps
+    command: npm run dev
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - app-media:/app/media
+    env_file:
+      - .env.local
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/rheuse
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - rheuse
+
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: rheuse
+    healthcheck:
+      test: ['CMD', 'mongosh', '--eval', "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - rheuse
+
+volumes:
+  mongo-data:
+  app-media:
+
+networks:
+  rheuse:
+    driver: bridge
