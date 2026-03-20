@@ -1,9 +1,9 @@
 import React from 'react'
 import type { Metadata } from 'next'
 import { Playfair_Display, Inter, DM_Sans } from 'next/font/google'
-import { Providers } from './_providers'
-import { Header } from './_components/Header'
-import { Footer } from './_components/Footer'
+import { Providers } from '@/app/_providers'
+import { Header } from '@/app/_components/Header'
+import { Footer } from '@/app/_components/Footer'
 import '@/app/_css/globals.scss'
 
 const playfairDisplay = Playfair_Display({
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function FrontendLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"

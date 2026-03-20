@@ -1,4 +1,4 @@
-@use '../../_css/variables' as *;
+@use '../../../_css/variables' as *;
 
 .page {
   display: flex;
@@ -34,6 +34,12 @@
   flex-direction: column;
   gap: $spacing-md;
   text-align: left;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-md;
 }
 
 .error {
